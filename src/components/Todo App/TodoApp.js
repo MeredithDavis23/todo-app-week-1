@@ -27,27 +27,26 @@ class TodoApp extends Component {
         })
     };
 
-    clearText = () => {
-        document.querySelectorAll('ul');
+    clearText = (index) => {
+        const erase = this.state.todos.splice(index,1)
         this.setState({
-          todos: []
-        });
+          erase
+    });
     };
 
 render() {
     return (
-             <div>
-                    <button onClick={this.handleClick}>Click Me</button>
-                    <input value={this.state.text} onChange={this.textUpdate}></input>
-                    <ul>
-                        {this.state.todos.map((todo, index) => {
-                            return <li key={index}>{this.state.todos[index]}</li>
-                        })}
-                    </ul>
-                    <button onClick={this.clearText}>Clear</button>
+        <div>
+            <button onClick={this.handleClick}>Click Me</button>
+            <input value={this.state.text} onChange={this.textUpdate}></input>
+            <ul>
+                {this.state.todos.map((todo, index) => {
+                    return <li key={index}>{this.state.todos[index]}<button onClick={this.clearText.bind(this, index)}>Clear</button></li>
+                })}
+            </ul>
 
 
-                </div>
+        </div>
         )
     }
 }
